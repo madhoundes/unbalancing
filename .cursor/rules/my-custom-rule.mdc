@@ -1,0 +1,100 @@
+---
+description: custom rules to add classes- id - other naming to this project
+globs: 
+alwaysApply: false
+---
+1. Naming Conventions
+
+A. Unique IDs
+
+Rule: All IDs must be globally unique and follow a structured naming pattern.
+Format: [component]-[purpose]-[unique-identifier]
+Example: header-nav-contact-btn, user-profile-avatar-img
+Optional: Add a project-specific prefix for scoping (e.g., prj-header-nav).
+
+Avoid: Generic names like button-1, image-2.
+
+B. Class Names
+
+Rule: Classes should be reusable but scoped to components.
+Format: Use BEM (Block-Element-Modifier) or SMACSS methodology:
+
+BEM Example: .card__header--active, .form__input-error
+Project-Scoped Example: .prj-card__header
+Dynamic Elements: Append a unique hash for dynamically generated classes (e.g., .user-card-abc123).
+2. Customization Structures
+A. CSS/SCSS Structure
+	•	Rule: Scope styles to components using unique classes/IDs.
+	
+/* BAD */
+.button { ... }
+#submit { ... }
+
+/* GOOD */
+.prj-contact-form__submit-btn { ... }
+#prj-homepage-hero-cta { ... }
+
+B. Dynamic Element Handling
+	•	Rule: For dynamically generated elements (e.g., React/Vue components), auto-append a unique ID/class:
+	
+    // Example: React component with dynamic ID
+const Component = () => (
+  <div id={`prj-feature-card-${uuidv4()}`}>...</div>
+);
+
+3. Automation & Validation
+A. Linting Tools
+	•	Use Stylelint or ESLint to enforce naming conventions:
+	
+	// .stylelintrc
+{
+  "rules": {
+    "selector-id-pattern": "^prj-[a-z]+(-[a-z]+)*$",
+    "selector-class-pattern": "^prj-[a-z]+(__[a-z]+)?(--[a-z]+)?$"
+  }
+}
+
+B. Build Process
+	•	Add a prefixer plugin (e.g., PostCSS) to auto-add project prefixes:
+	
+	// postcss.config.js
+module.exports = {
+  plugins: [
+    require('postcss-prefixwrap')('.prj', { /* options */ }),
+  ]
+};
+
+4. Documentation
+	•	Rule: Maintain a STYLE_GUIDE.md with:
+	◦	Naming conventions (e.g., "All buttons start with prj-btn-").
+	◦	Examples of valid/invalid IDs and classes.
+	◦	Links to automation tools and linting rules.
+
+5. Example Implementation
+HTML
+
+<!-- Component with unique ID and class -->
+<nav id="prj-main-nav" class="prj-nav prj-nav--dark">
+  <a href="#" class="prj-nav__link prj-nav__link--active" id="prj-nav-home-btn">Home</a>
+</nav>
+
+CSS/SCSS
+
+// Project-scoped BEM
+.prj-nav {
+  &__link {
+    &--active { ... }
+  }
+}
+
+// Unique ID
+#prj-main-nav {
+  ...
+}
+
+6. Validation Checklist
+	1	Uniqueness: Use tools like [W3C Validator](https://validator.w3.org/) to check for duplicate IDs.
+	2	Specificity: Avoid overqualifying selectors (e.g., div#prj-header → #prj-header).
+	3	Dynamic Content: Test auto-generated IDs/classes in UI frameworks.
+
+By following these rules, you’ll ensure a scalable, conflict-free codebase. Adjust the prefixes (e.g., prj) and conventions to match your project’s needs.
