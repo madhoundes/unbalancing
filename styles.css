@@ -494,6 +494,8 @@ img {
     will-change: transform;
     transform-origin: center center;
     backface-visibility: hidden;
+    transition: none;
+    transform: none !important;
 }
 
 .niche-image::before {
@@ -1102,7 +1104,7 @@ html {
     transform: none !important;
 }
 
-.hero-image img, .feature-card img, .niche-image {
+.hero-image img, .feature-card img {
     transition: transform 0.5s ease;
 }
 
