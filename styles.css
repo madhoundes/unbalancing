@@ -4,6 +4,7 @@
     src: url('fonts/CircularStd-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -11,6 +12,7 @@
     src: url('fonts/CircularStd-Bold.otf') format('opentype');
     font-weight: 700;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -18,6 +20,7 @@
     src: url('fonts/circular-book.otf') format('opentype');
     font-weight: 400;
     font-style: normal;
+    font-display: swap;
 }
 
 /* Global Styles */
@@ -36,10 +39,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-    font-family: 'CircularStd', sans-serif;
+    font-family: 'CircularStd', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     color: var(--text-color);
     line-height: 1.6;
     background-color: var(--background-color);
@@ -171,8 +176,8 @@ img {
 }
 
 .hero-text {
-    flex: 1;
-    max-width: 600px;
+    flex: 1.2;
+    max-width: 573px;
     will-change: transform, opacity;
     backface-visibility: hidden;
 }
@@ -242,8 +247,8 @@ img {
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(21.375rem, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
     margin-top: 60px;
     justify-items: center;
 }
@@ -253,37 +258,75 @@ img {
     background-position: 50%, 10%;
     background-size: 80%;
     background-repeat: no-repeat;
-    border-radius: 28px;
-    padding: 40px 30px;
-    box-shadow: 0 7.5px 20px rgba(0, 0, 0, 0.04);
+    padding: 32px 24px;
     text-align: left;
-    transition: var(--transition);
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(234, 238, 240, 0.8);
-    width: 21.375rem;
-    height: 37.625rem;
+    border-radius: 1.25rem;
+    width: 100%;
+    max-width: 342px;
+    height: auto;
+    min-height: 602px;
+    display: flex;
+    flex-direction: column;
 }
 
-#prj-feature-card-01 .img-illustration{
-   transform: scale(1.6);
-   width: 37.1875rem;
-   height: 13.25rem;
-   -webkit-transform-origin: 58px 80px;
-   -moz-transform-origin: 58px 80px;
-   -ms-transform-origin: 58px 80px;
-   -o-transform-origin: 58px 80px;
-   transform-origin: 58px 80px;
+.feature-card .icon {
+    margin-bottom: 24px;
 }
 
-.feature-card:hover {
-    transform: none;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.025);
-    border-color: #f0f0f0;
+.feature-card h3 {
+    font-family: 'CircularStd-Bold';
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUpFade 0.6s ease forwards;
 }
 
-.feature-card:hover .icon {
-    transform: translateZ(0); /* Adding a minimal transform to avoid empty ruleset */
+@keyframes slideUpFade {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.feature-card p {
+    font-family: 'CircularStd', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 18px;
+    margin-bottom: 24px;
+    color: #4A515B;
+}
+
+.feature-card img.img-illustration {
+    /* margin-top: auto; */
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    transform: scale(1.130)
+}
+
+
+.img-illustration.map {
+    margin-top: auto;
+    height: auto;
+    transform: scale(1.8) !important;
+    transform-origin: 30px 100px;
+    margin-bottom: -20px;
+}
+
+
+.feature-card {
+    transition: none;
 }
 
 .feature-card .icon {
@@ -296,31 +339,20 @@ img {
     flex-shrink: 0;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(255, 158, 44, 0.06);
-    transition: var(--transition);
 }
 
 .feature-card .icon img {
-    transition: var(--transition);
+    transition: none;
 }
 
 .feature-card h3 {
     color: #1A1A1A;
-    font-family: "Circular Std";
+    font-family: "Circular Std", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     font-size: 1.5rem;
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
     margin-bottom: 15px;
-}
-
-.feature-card p {
-    font-size: 1.125rem;
-    line-height: 145%;
-    color: #4A515B;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 400;
-    margin-bottom: 0;
 }
 
 .feature-card img {
@@ -336,10 +368,6 @@ img {
     display: none;
 }
 
-.feature-card:hover::after {
-    width: 0;
-}
-
 /* Features Grid Animation Styles */
 .features-grid .feature-card {
     opacity: 0; /* Initially hidden */
@@ -351,14 +379,15 @@ img {
 .features-grid .feature-card.animated {
     opacity: 1;
     transform: translateX(0);
+    max-height: 602px;
     /* Ensure the animated card can still use the regular hover effects */
     transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 }
 
 /* Ensure hover effects work properly after animation */
-.features-grid .feature-card.animated:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+.features-grid .feature-card.animated {
+    transform: none;
+    box-shadow: none;
 }
 
 /* Niches Section */
@@ -443,7 +472,7 @@ img {
     overflow: hidden;
     border: 1.2px solid #EAEEF0;
     background: #F9FBFC;
-    transition: transform 0.25s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transition: none;
     cursor: pointer;
     height: 100%;
     will-change: transform, opacity;
@@ -451,9 +480,9 @@ img {
     backface-visibility: hidden;
 }
 
-.niche-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+.niche-card {
+    transform: none;
+    box-shadow: none;
 }
 
 .niche-image {
@@ -573,7 +602,6 @@ img {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    transition: all 0.3s ease;
 }
 
 .niche-card .niche-name {
@@ -606,18 +634,11 @@ img {
     width: auto;
 }
 
-.niche-card .niche-name:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transition: none;
-}
-
 .apps-img, .news-img, .media-img, .crypto-img, .finance-img, 
 .vpn-img, .trading-img, .beauty-img, .shopping-img, 
 .wellness-img, .insurance-img, .lifestyle-img {
     background-size: cover;
     background-position: center;
-    will-change: transform;
-    transform: translateZ(0);
 }
 
 /* Get Started Section */
@@ -638,16 +659,15 @@ img {
     background-color: white;
     border-radius: var(--border-radius);
     /* box-shadow: var(--box-shadow); */
-    transition: var(--transition);
+    transition: none;
     border-radius: 1.25rem;
-border: 1px solid #EAEEF0;
-background: #F9FBFC;
+    border: 1px solid #EAEEF0;
+    background: #F9FBFC;
 }
 
-.step-card:hover {
-    transform: translateY(-5px);
-    text-align: left;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+.step-card {
+    transform: none;
+    /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); */
 }
 
 .step-card .icon {
@@ -667,13 +687,14 @@ background: #F9FBFC;
     /* width: 30px; */
     /* height: 30px; */
     width: 4.875rem;
-height: 4.875rem;
+    height: 4.875rem;
 }
-.newicons{
 
+.newicons{
     width:auto;
     max-width: 80px;
 }
+
 .step-card h3 {
     font-size: 1.3rem;
     margin-bottom: 10px;
@@ -687,7 +708,7 @@ height: 4.875rem;
 /* FAQ Section */
 .faq-section {
     padding: 80px 0;
-    background-color: var(--light-gray);
+    /* background-color: var(--light-gray); */
 }
 
 .accordion {
@@ -702,12 +723,12 @@ height: 4.875rem;
     overflow: hidden;
     box-shadow: var(--box-shadow);
     font-family: 'CircularStd', sans-serif;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    transition: none;
 }
 
-.accordion-item:hover {
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
-    transform: translateY(-1px);
+.accordion-item {
+    transform: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .accordion-button {
@@ -723,12 +744,12 @@ height: 4.875rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background-color 0.3s ease;
+    transition: none;
     font-family: 'CircularStd', sans-serif;
 }
 
-.accordion-button:hover {
-    background-color: #f9f9f9;
+.accordion-button {
+    background-color: inherit;
 }
 
 .accordion-button.active {
@@ -743,7 +764,7 @@ height: 4.875rem;
     display: inline-block;
     border: none;
     margin-left: 10px;
-    transition: all 0.3s ease;
+    transition: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='12' y1='5' x2='12' y2='19'%3E%3C/line%3E%3Cline x1='5' y1='12' x2='19' y2='12'%3E%3C/line%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: center;
@@ -1020,7 +1041,14 @@ height: 4.875rem;
         width: auto;
         max-height: 500px;
         object-fit: contain;
-        object-position: bottom;
+        object-position: -20px 0;
+    }
+}
+
+@media screen and (min-width: 993px) and (max-width: 1144px) {
+    .hero-image {
+        display: block;
+        flex: 2;
     }
 }
 
@@ -1037,9 +1065,9 @@ html {
     transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 }
 
-.btn:hover, .feature-card:hover, .niche-card:hover, .step-card:hover {
+.btn:hover, .feature-card, .niche-card, .step-card, .accordion-button {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); */
 }
 
 .accordion-content {
@@ -1070,16 +1098,16 @@ html {
     z-index: 0;
 }
 
-.feature-card:hover::before, .niche-card:hover::before, .step-card:hover::before {
-    opacity: 1;
+.feature-card, .niche-card, .step-card {
+    transform: none !important;
 }
 
 .hero-image img, .feature-card img, .niche-image {
     transition: transform 0.5s ease;
 }
 
-.hero-image:hover img {
-    transform: scale(1.02);
+.hero-image img {
+    transform: none;
 }
 
 .img-illustration {
@@ -1159,10 +1187,14 @@ section {
     transition: opacity 0.3s ease;
 }
 
-.hero-image {
+/* .hero-image {
     transition: opacity 0.5s ease, transform 0.5s ease;
     opacity: 0;
     transform: translateX(50px);
+} */
+
+.highlight {
+    color: #F09324;
 }
 
 /* Removed morphing title styles as requested */
